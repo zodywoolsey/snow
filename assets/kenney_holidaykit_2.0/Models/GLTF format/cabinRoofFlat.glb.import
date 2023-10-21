@@ -1,0 +1,39 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://d2krtyir0v6v6"
+path="res://.godot/imported/cabinRoofFlat.glb-53b5dcea1abdc1887c85fa235e75883e.scn"
+
+[deps]
+
+source_file="res://assets/kenney_holidaykit_2.0/Models/GLTF format/cabinRoofFlat.glb"
+dest_files=["res://.godot/imported/cabinRoofFlat.glb-53b5dcea1abdc1887c85fa235e75883e.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=3.0
+meshes/ensure_tangents=false
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=3
+meshes/lightmap_texel_size=0.2
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"nodes": {
+"PATH:tmpParent/cabinRoofFlat2": {
+"generate/physics": true,
+"physics/shape_type": 2
+}
+}
+}
+gltf/embedded_image_handling=2

@@ -1,0 +1,39 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://c32cltmy11t4c"
+path="res://.godot/imported/cabinCorner.glb-9d346feb6fabf21e89cb2d831542cd03.scn"
+
+[deps]
+
+source_file="res://assets/kenney_holidaykit_2.0/Models/GLTF format/cabinCorner.glb"
+dest_files=["res://.godot/imported/cabinCorner.glb-9d346feb6fabf21e89cb2d831542cd03.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=3.0
+meshes/ensure_tangents=false
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=3
+meshes/lightmap_texel_size=0.2
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"nodes": {
+"PATH:tmpParent/cabinCorner2": {
+"generate/physics": true,
+"physics/shape_type": 2
+}
+}
+}
+gltf/embedded_image_handling=2

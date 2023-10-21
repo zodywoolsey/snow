@@ -1,0 +1,43 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://dinnfnm8kje7s"
+path="res://.godot/imported/lightpost.glb-6fec4c120db34ad88130264a06a4ae71.scn"
+
+[deps]
+
+source_file="res://assets/kenney_holidaykit_2.0/Models/GLTF format/lightpost.glb"
+dest_files=["res://.godot/imported/lightpost.glb-6fec4c120db34ad88130264a06a4ae71.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=3.0
+meshes/ensure_tangents=false
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=3
+meshes/lightmap_texel_size=0.2
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"materials": {
+"_defaultMat": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/kenney_holidaykit_2.0/Models/materials/_defaultMat.tres"
+},
+"trainGrey": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/kenney_holidaykit_2.0/Models/materials/trainGrey.tres"
+}
+}
+}
+gltf/embedded_image_handling=2

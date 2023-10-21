@@ -1,0 +1,141 @@
+[gd_scene load_steps=7 format=3 uid="uid://dqhomu0wkoqfa"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_g2ams"]
+[ext_resource type="AudioStream" uid="uid://bsgvkdgldw6fu" path="res://assets/wind/wind-01.ogg" id="2_y138x"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_of3yi"]
+radius = 0.2
+
+[sub_resource type="GDScript" id="GDScript_yjfek"]
+script/source = "extends Node3D
+
+var pickedObject :RigidBody3D
+var prevpicked:RigidBody3D
+var placed = false
+@export var handSpeed = .2
+
+func _physics_process(delta):
+	if prevpicked and prevpicked != pickedObject:
+		prevpicked.freeze = false
+		prevpicked.linear_damp = 0.0
+		prevpicked.angular_damp = 0.0
+		rotation = Vector3()
+	prevpicked = pickedObject
+	if pickedObject:
+#		var pickpos = pickedObject.global_position
+#		var pickdist = pickpos.distance_to(global_position)
+#		var pickdir = pickpos.direction_to(global_position)
+#		pickedObject.linear_damp = 1.0/pickdist
+#		pickedObject.angular_damp = 1.0/pickdist
+#		pickedObject.apply_central_impulse(pickdir)
+		
+		pickedObject.freeze = true
+		pickedObject.global_position.x = lerpf(pickedObject.global_position.x, global_position.x, handSpeed)
+		pickedObject.global_position.y = lerpf(pickedObject.global_position.y, global_position.y, handSpeed)
+		pickedObject.global_position.z = lerpf(pickedObject.global_position.z, global_position.z, handSpeed)
+
+		pickedObject.global_rotation.x = lerp_angle(pickedObject.global_rotation.x, global_rotation.x,handSpeed)
+		pickedObject.global_rotation.y = lerp_angle(pickedObject.global_rotation.y, global_rotation.y,handSpeed)
+		pickedObject.global_rotation.z = lerp_angle(pickedObject.global_rotation.z, global_rotation.z,handSpeed)
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s8e6t"]
+size = Vector3(1, 1, 2.26717)
+
+[sub_resource type="GDScript" id="GDScript_t6ggk"]
+script/source = "extends AudioStreamPlayer3D
+
+var steps = [preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_01.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_02.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_03.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_04.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_05.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_06.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_07.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_08.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_09.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_10.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_11.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_12.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_13.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_14.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_15.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_16.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_17.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_18.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_01.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_02.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_03.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_04.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_05.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_06.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_07.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_08.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_09.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_10.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_11.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_12.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_13.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_14.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_15.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_16.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_17.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_18.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_19.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_20.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_21.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_22.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_23.ogg\"), preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_24.ogg\")]
+
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_01.ogg\")
+#var step1 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_02.ogg\")
+#var step2 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_03.ogg\")
+#var step3 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_04.ogg\")
+#var step4 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_05.ogg\")
+#var step5 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_06.ogg\")
+#var step6 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_07.ogg\")
+#var step7 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_08.ogg\")
+#var step = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_09.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_10.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_11.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_12.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_13.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_14.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_15.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_16.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_17.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_18.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_01.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_02.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_03.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_04.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_05.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_06.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_07.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_08.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_09.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_10.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_11.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_12.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_13.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_14.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_15.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_16.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_17.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_18.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_19.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_20.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_21.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_22.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_23.ogg\")
+#var step0 = preload(\"res://assets/snowSounds/Corsica_S-Walking_on_snow_covered_gravel_and_ice_24.ogg\")
+func play_random():
+	stream = steps.pick_random()
+	play()
+"
+
+[node name="player" type="CharacterBody3D" groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_g2ams")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_of3yi")
+
+[node name="cameraParent" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="cameraParent"]
+transform = Transform3D(1, 0, 0, 0, 0.444369, -0.895844, 0, 0.895844, 0.444369, 0, 0, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="cameraParent/Camera3D"]
+target_position = Vector3(0, 0, -2.5)
+collision_mask = 2
+
+[node name="InteractionRay" type="RayCast3D" parent="cameraParent/Camera3D"]
+target_position = Vector3(0, 0, -2.5)
+collision_mask = 4
+
+[node name="hand" type="Node3D" parent="cameraParent/Camera3D" groups=["hand"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.567737, -0.329445, -1.39456)
+script = SubResource("GDScript_yjfek")
+handSpeed = 0.05
+
+[node name="Area3D" type="Area3D" parent="cameraParent/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="cameraParent/Camera3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.131452, -1.42016)
+shape = SubResource("BoxShape3D_s8e6t")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+max_db = -12.78
+script = SubResource("GDScript_t6ggk")
+
+[node name="wind" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_y138x")
+volume_db = -80.0
+max_db = 0.0
+pitch_scale = 0.7
+autoplay = true
